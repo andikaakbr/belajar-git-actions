@@ -1,0 +1,26 @@
+name: Contoh GitHub Actions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Build
+      run: |
+        echo "Proses pembangunan..."
+
+    - name: Test
+      run: |
+        echo "Proses pengujian..."
+        
+    - name: Deploy
+      run: |
+        echo "Proses deploy..."
