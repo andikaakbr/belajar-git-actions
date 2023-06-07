@@ -1,4 +1,4 @@
-name: Contoh GitHub Actions
+name: GitHub Actions
 
 on:
   push:
@@ -12,15 +12,23 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-      
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        
+    - name: Install Composer Dependencies
+      run: composer install --no-interaction --prefer-dist
+
+    - name: Generate Application Key
+      run: php artisan key:generate
+
     - name: Build
-      run: |
-        echo "Proses pembangunan..."
+      run: php artisan build
 
     - name: Test
-      run: |
-        echo "Proses pengujian..."
-        
+      run: php artisan test
+
     - name: Deploy
-      run: |
-        echo "Proses deploy..."
+      run: php artisan deploy
