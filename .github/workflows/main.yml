@@ -6,29 +6,19 @@ on:
       - main
 
 jobs:
-  build:
+  auto_push:
     runs-on: windows-latest
 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-        
-    - name: Install Composer Dependencies
-      run: composer install --no-interaction --prefer-dist
+    - name: Configure Git
+      run: |
+        git config --global user.name "Your Name"
+        git config --global user.email "your-email@example.com"
 
-    - name: Generate Application Key
-      run: php artisan key:generate
-
-    - name: Build
-      run: php artisan build
-
-    - name: Test
-      run: php artisan test
-
-    - name: Deploy
-      run: php artisan deploy
+    - name: Commit and Push Changes
+      run: |
+        git commit -am "Auto commit"
+        git push
